@@ -20,3 +20,8 @@
 :process-command
 (fn [db [_ command]]
   db))
+
+(reg-event-db
+:talk
+(fn [db [_ npc]]
+  (assoc db :current-npc-response (rand-nth (get-in db [:current-room :npcs npc :responses])))))

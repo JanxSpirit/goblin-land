@@ -29,5 +29,4 @@ Exits: a trapdoor [down], a set of swinging doors [west]."
 
 (def default-db
   {:move-direction "you did not move yet"
-   :current-room (:kitchen rooms)}
-  )
+   :current-room (:kitchen rooms)})

@@ -10,14 +10,16 @@
   (let [room-description (subscribe [:room-description])
         room-exits (subscribe [:room-exits])
         move-direction (subscribe [:move-direction])
-        npcs (subscribe [:npcs])]
+        npcs (subscribe [:npcs])
+        current-npc-response (subscribe [:current-npc-response])]
+    
     (fn []
       (let [room-exit-directions (keys @room-exits)]
         [:div [:h1 "The Game of GoblinLand!"]
          [:p @room-description]
          [:p "room occupants: "]
          [:ul (for [npc @npcs]
-                [:li {:key npc} npc])]
+                [:li {:key npc} npc " " [:a {:href "#" :on-click #(dispatch [:talk npc])} "Talk"]])]
          [:p "your last move direction was: " @move-direction]
          [:p "Move:"] 
          [:ul 
@@ -32,4 +34,6 @@
          [:p "Enter your command: " [:input {:type "text" 
                                              :on-key-press (fn [e]
                                                              (if (= 13 (.-charCode e))
-                                                               (dispatch [:process-command (-> e .-target .-value)])))}]]]))))
+                                                               (dispatch [:process-command (-> e .-target .-value)])))}]]
+         [:p "You:"]
+         [:p @current-npc-response]]))))

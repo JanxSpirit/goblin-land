@@ -27,5 +27,10 @@
  (fn [db]
    (keys (get-in db [:current-room :npcs]))))
 
+(reg-sub
+ :current-npc-response
+ (fn [db]
+   (:current-npc-response db)))
+
 
 
