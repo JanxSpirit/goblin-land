@@ -27,6 +27,13 @@ Exits: a trapdoor [down], a set of swinging doors [west]."
                           :npcs {"waiter" {:responses ["got to get to the Cyclops at table 9!"]}
                                  "Cyclops" {:responses ["Urggghhh"]}}}})
 
+(def player-talk-lines 
+  [
+   "Ehhh...what's up doc?"
+   "Greetings."
+   "What can you tell me?"
+])
+
 (def default-db
   {:move-direction "you did not move yet"
    :current-room (:kitchen rooms)})

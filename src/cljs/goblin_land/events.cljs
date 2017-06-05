@@ -1,6 +1,6 @@
 (ns goblin-land.events
     (:require [re-frame.core :as re-frame :refer [reg-event-db]]
-              [goblin-land.db :as db :refer [rooms default-db]]))
+              [goblin-land.db :as db :refer [rooms player-talk-lines default-db]]))
 
 (reg-event-db
  :initialize-db
@@ -24,4 +24,8 @@
 (reg-event-db
 :talk
 (fn [db [_ npc]]
-  (assoc db :current-npc-response (rand-nth (get-in db [:current-room :npcs npc :responses])))))
+  (assoc db 
+         :current-npc-response (rand-nth (get-in db [:current-room :npcs npc :responses]))
+         :current-npc-name npc
+         :current-player-talk (rand-nth player-talk-lines)
+)))

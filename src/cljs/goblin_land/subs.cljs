@@ -28,9 +28,17 @@
    (keys (get-in db [:current-room :npcs]))))
 
 (reg-sub
+ :current-npc-name
+ (fn [db]
+   (:current-npc-name db)))
+
+(reg-sub
  :current-npc-response
  (fn [db]
    (:current-npc-response db)))
 
-
+(reg-sub
+ :current-player-talk
+ (fn [db]
+   (:current-player-talk db)))
 

@@ -11,7 +11,9 @@
         room-exits (subscribe [:room-exits])
         move-direction (subscribe [:move-direction])
         npcs (subscribe [:npcs])
-        current-npc-response (subscribe [:current-npc-response])]
+        current-npc-response (subscribe [:current-npc-response])
+        current-npc-name (subscribe [:current-npc-name])
+        current-player-talk (subscribe [:current-player-talk])]
     
     (fn []
       (let [room-exit-directions (keys @room-exits)]
@@ -35,5 +37,5 @@
                                              :on-key-press (fn [e]
                                                              (if (= 13 (.-charCode e))
                                                                (dispatch [:process-command (-> e .-target .-value)])))}]]
-         [:p "You:"]
-         [:p @current-npc-response]]))))
+         [:p "You: " @current-player-talk]
+         [:p @current-npc-name ": " @current-npc-response]]))))
