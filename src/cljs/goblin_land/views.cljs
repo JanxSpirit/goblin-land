@@ -1,10 +1,22 @@
 (ns goblin-land.views
-    (:require [re-frame.core :as re-frame :refer [subscribe dispatch]]))
+    (:require [re-frame.core :as re-frame :refer [subscribe dispatch]]
+              [clojure.string :as str])
+)
 
 (defn direction-link [room-exits direction]
   (if (some #(= (keyword direction) %) room-exits)
     [:a {:href "#" :on-click #(dispatch [:move direction])} direction]
     direction))
+
+(defn create-speech-event [cmd prefix speech]
+  [cmd (str/trim (last (str/split (str/lower-case speech) prefix)))]
+)
+
+(defn speech-event [speech]
+  (condp str/starts-with? (str/lower-case speech)
+    "look at" (create-speech-event :look-at "look at" speech)
+    [:unrecognized-speech]
+))
 
 (defn main-panel []
   (let [room-description (subscribe [:room-description])
